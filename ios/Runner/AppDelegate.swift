@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import FirebaseCore
+// import FirebaseCore
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -9,13 +9,13 @@ import FirebaseCore
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         GeneratedPluginRegistrant.register(with: self)
-        FirebaseApp.configure()
+        // FirebaseApp.configure()
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    func application(_ app: UIApplication,
-                     open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance.handle(url)
-    }
+    // func application(_ app: UIApplication,
+    //                  open url: URL,
+    //                  options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    //     return GIDSignIn.sharedInstance.handle(url)
+    // }
 }
