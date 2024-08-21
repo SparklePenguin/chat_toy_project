@@ -6,20 +6,20 @@ import '../../model/user.dart';
 
 final class ChatMainBinding implements Bindings {
   ChatMainBinding({required GoogleSignInUserData googleAuthData})
-      : _user = User(
-          name: googleAuthData.displayName ?? "NoNamed..",
-          email: googleAuthData.email,
-        ),
+      : _username = googleAuthData.displayName ?? "NoNamed..",
+        _email = googleAuthData.email,
         _googleAuthData = googleAuthData;
 
-  final User _user;
+  final String _email;
+  final String _username;
   final GoogleSignInUserData _googleAuthData;
 
   @override
   void dependencies() {
     Get.lazyPut(
       () => ChatMainController(
-        user: _user,
+        username: _username,
+        email: _email,
         googleUser: _googleAuthData,
       ),
     );

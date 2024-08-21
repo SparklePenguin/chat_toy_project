@@ -17,9 +17,9 @@ final class ChatMain extends GetView<ChatMainController> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Label(text: '이름: ${controller.user.name}'),
+            Label(text: '이름: ${controller.username}'),
             const Gap(4.0),
-            Label(text: '이메일: ${controller.user.email}'),
+            Label(text: '이메일: ${controller.email}'),
           ],
         ),
         Column(

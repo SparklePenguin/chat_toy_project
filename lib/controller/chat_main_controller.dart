@@ -1,36 +1,53 @@
 import 'dart:convert';
 
+import 'package:chat_toy_project/application/utils/date_formatter.dart';
 import 'package:chat_toy_project/controller/binding/sign_in_binding.dart';
 import 'package:chat_toy_project/model/user.dart';
 import 'package:chat_toy_project/view/sign_in.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
 import 'package:http/http.dart' as http;
 
-final class ChatMainController extends GetxController {
-  ChatMainController({required this.user, this.googleUser});
+import '../application/configuration/secrets.dart';
 
-  final User user;
+final class ChatMainController extends GetxController {
+  ChatMainController({
+    required this.username,
+    required this.email,
+    this.googleUser,
+  });
+
+  final dio = Dio();
+  final String username;
+  final String email;
   final GoogleSignInUserData? googleUser;
   final contactText = ''.obs;
   Future<void>? initialization;
 
   // MARK: - Life Cycle
 
-
   // MARK: - API
 
-  // Future<User> detail({required String entryIdentifier}) async {
-  //   try {
-  //     final response =
-  //         await dio.post('${Secrets.baseURL}diary/?entry_id=$entryIdentifier');
-  //     return Diary.fromMap((response.data as dynamic));
-  //   } catch (e) {
-  //     print('Unexpected error: $e');
-  //     rethrow;
-  //   }
-  // }
+  Future<User> signUp({required String username, required String email}) async {
+    try {
+      const url = '${Secrets.baseURL}/user/';
+      final data = {
+        "username": username,
+        "email": email,
+        "role": "user",
+        "password": username,
+        "created_at": DateTime.now().iso,
+        "updated_at": DateTime.now().iso
+      };
+      final response = await dio.post(url, data: data);
+      return User.fromMap(response.data as dynamic);
+    } catch (e) {
+      print('Unexpected error: $e');
+      rethrow;
+    }
+  }
 
   // MARK: - Google Sign In
 
