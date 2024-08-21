@@ -1,4 +1,4 @@
-import 'package:chat_toy_project/controller/chat_main_controller.dart';
+import 'package:chat_toy_project/controller/main_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
 
@@ -17,7 +17,7 @@ final class ChatMainBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => ChatMainController(
+      () => MainController(
         username: _username,
         email: _email,
         googleUser: _googleAuthData,

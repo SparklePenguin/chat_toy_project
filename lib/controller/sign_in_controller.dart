@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
 
-import '../view/chat_main.dart';
+import '../view/main.dart';
 import 'binding/chat_main_binding.dart';
 
 final class SignInController extends GetxController {
@@ -58,7 +58,7 @@ final class SignInController extends GetxController {
   void _setUser(GoogleSignInUserData? user) {
     if (user != null) {
       Get.off(
-        const ChatMain(),
+        const Main(),
         binding: ChatMainBinding(googleAuthData: user),
       );
     }

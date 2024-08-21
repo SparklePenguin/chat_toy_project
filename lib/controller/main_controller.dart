@@ -1,9 +1,5 @@
 import 'dart:convert';
 
-import 'package:chat_toy_project/application/utils/date_formatter.dart';
-import 'package:chat_toy_project/controller/binding/sign_in_binding.dart';
-import 'package:chat_toy_project/model/user.dart';
-import 'package:chat_toy_project/view/sign_in.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -11,10 +7,14 @@ import 'package:google_sign_in_platform_interface/google_sign_in_platform_interf
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'binding/sign_in_binding.dart';
 import '../application/configuration/secrets.dart';
+import '../application/utils/date_formatter.dart';
+import '../model/user.dart';
+import '../view/sign_in.dart';
 
-final class ChatMainController extends GetxController {
-  ChatMainController({
+final class MainController extends GetxController {
+  MainController({
     required this.username,
     required this.email,
     this.googleUser,

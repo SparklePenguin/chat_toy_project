@@ -3,12 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../application/common/app_text.dart';
-import '../controller/chat_main_controller.dart';
+import '../controller/main_controller.dart';
 import 'shared/button.dart';
 import 'shared/label.dart';
 
-final class ChatMain extends GetView<ChatMainController> {
-  const ChatMain({super.key});
+final class Main extends GetView<MainController> {
+  const Main({super.key});
 
   Widget _buildBody() {
     return Column(
@@ -30,8 +30,7 @@ final class ChatMain extends GetView<ChatMainController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Obx(
-              () =>
-                  Label(text: 'API Response: ${controller.contactText}'),
+              () => Label(text: 'API Response: ${controller.contactText}'),
             ),
             const Gap(4.0),
             Button(
