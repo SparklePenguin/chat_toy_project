@@ -20,13 +20,19 @@ final class ChatMain extends GetView<ChatMainController> {
             Label(text: '이름: ${controller.username}'),
             const Gap(4.0),
             Label(text: '이메일: ${controller.email}'),
+            const Gap(4.0),
+            Obx(
+              () => Label(text: 'id: ${controller.userId}'),
+            ),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Obx(() =>
-                Label(text: 'API Response: ${controller.contactText.value}')),
+            Obx(
+              () =>
+                  Label(text: 'API Response: ${controller.contactText}'),
+            ),
             const Gap(4.0),
             Button(
               title: AppText.googleAuthRefresh,

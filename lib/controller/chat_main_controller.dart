@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../application/configuration/secrets.dart';
 
@@ -22,24 +23,58 @@ final class ChatMainController extends GetxController {
   final dio = Dio();
   final String username;
   final String email;
+  final userId = ''.obs;
   final GoogleSignInUserData? googleUser;
   final contactText = ''.obs;
   Future<void>? initialization;
 
+  late final User user;
+
   // MARK: - Life Cycle
+
+  @override
+  onInit() async {
+    super.onInit();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final id = prefs.getString('id');
+    if (id == null) {
+      user = await createUser(username: username, email: email);
+      await prefs.setString('id', user.id);
+    } else {
+      user = await fetchUser(id: id);
+    }
+    userId.value = user.id;
+  }
+
+  // MARK: - Private
 
   // MARK: - API
 
-  Future<User> signUp({required String username, required String email}) async {
+  Future<User> createUser(
+      {required String username, required String email}) async {
     try {
       const url = '${Secrets.baseURL}/user/';
       final data = {
         "username": username,
         "email": email,
         "role": "user",
-        "password": username,
+        "password": 'password',
         "created_at": DateTime.now().iso,
-        "updated_at": DateTime.now().iso
+        "updated_at": DateTime.now().iso,
+      };
+      final response = await dio.post(url, data: data);
+      return User.fromMap(response.data as dynamic);
+    } catch (e) {
+      print('Unexpected error: $e');
+      rethrow;
+    }
+  }
+
+  Future<User> fetchUser({required String id}) async {
+    try {
+      const url = '${Secrets.baseURL}/user/info';
+      final data = {
+        "user_id": id,
       };
       final response = await dio.post(url, data: data);
       return User.fromMap(response.data as dynamic);
