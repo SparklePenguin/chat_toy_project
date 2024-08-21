@@ -18,6 +18,20 @@ final class ChatMainController extends GetxController {
 
   // MARK: - Life Cycle
 
+
+  // MARK: - API
+
+  // Future<User> detail({required String entryIdentifier}) async {
+  //   try {
+  //     final response =
+  //         await dio.post('${Secrets.baseURL}diary/?entry_id=$entryIdentifier');
+  //     return Diary.fromMap((response.data as dynamic));
+  //   } catch (e) {
+  //     print('Unexpected error: $e');
+  //     rethrow;
+  //   }
+  // }
+
   // MARK: - Google Sign In
 
   Future<Map<String, String>> _getAuthHeaders() async {
