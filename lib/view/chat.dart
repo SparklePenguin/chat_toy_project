@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../application/common/app_text.dart';
 import '../controller/chat_controller.dart';
-import 'shared/button.dart';
 import 'shared/label.dart';
 
 final class Chat extends GetView<ChatController> {

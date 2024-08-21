@@ -7,25 +7,25 @@ import 'package:google_sign_in_platform_interface/google_sign_in_platform_interf
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'binding/sign_in_binding.dart';
 import '../application/configuration/secrets.dart';
 import '../application/utils/date_formatter.dart';
 import '../model/user.dart';
 import '../view/sign_in.dart';
+import 'binding/sign_in_binding.dart';
 
 final class MainController extends GetxController {
-  MainController({
-    required this.username,
-    required this.email,
-    this.googleUser,
-  });
+  MainController({required this.username, required this.email});
+
+  MainController.google({required GoogleSignInUserData this.googleAuthData})
+      : username = googleAuthData.displayName ?? '',
+        email = googleAuthData.email;
 
   final dio = Dio();
   final String username;
   final String email;
   final userId = ''.obs;
-  final GoogleSignInUserData? googleUser;
   final contactText = ''.obs;
+  GoogleSignInUserData? googleAuthData;
   Future<void>? initialization;
 
   late final User user;
@@ -87,7 +87,7 @@ final class MainController extends GetxController {
   // MARK: - Google Sign In
 
   Future<Map<String, String>> _getAuthHeaders() async {
-    final GoogleSignInUserData? user = googleUser;
+    final GoogleSignInUserData? user = googleAuthData;
     if (user == null) {
       throw StateError('No user signed in');
     }

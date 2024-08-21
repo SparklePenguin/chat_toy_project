@@ -1,11 +1,8 @@
-import 'package:chat_toy_project/controller/chat_list_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../application/common/app_text.dart';
-import '../controller/chat_controller.dart';
-import 'shared/button.dart';
+import '../controller/chat_list_controller.dart';
 import 'shared/label.dart';
 
 final class ChatList extends GetView<ChatListController> {

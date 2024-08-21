@@ -1,8 +1,7 @@
-import 'package:chat_toy_project/view/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'controller/binding/sign_in_binding.dart';
+import 'routes/app_pages.dart';
 
 final class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -10,14 +9,10 @@ final class AppRoot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: '/signIn',
-      getPages: [
-        GetPage(
-          name: '/signIn',
-          page: () => const SignIn(),
-          binding: SignInBinding(),
-        ),
-      ],
+      title: "PenguinChat",
+      // initialBinding: ,
+      getPages: AppPages.routes,
+      initialRoute: AppPages.initial,
     );
   }
 }
